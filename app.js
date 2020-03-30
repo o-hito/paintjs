@@ -4,9 +4,10 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
+const refreshBtn = document.getElementById("jsRefresh");
 
 const INITIAL_COLOR = "#2c2c2c";
-const CANVAS_SIZE = 700;
+const CANVAS_SIZE = 500;
 
 //canvas 에는 항상 값을 줘야한다 = 이유를 찾기
 canvas.width = CANVAS_SIZE;
@@ -81,6 +82,13 @@ function handleSaveClick() {
   link.click(); // fake click event 를 달아줘야 작동한다.. 흐음..
 }
 
+function handleRefreshClick() {
+  const preColor = ctx.fillStyle;
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  ctx.fillStyle = preColor;
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
@@ -105,4 +113,8 @@ if (mode) {
 
 if (saveBtn) {
   saveBtn.addEventListener("click", handleSaveClick);
+}
+
+if (refreshBtn) {
+  refreshBtn.addEventListener("click", handleRefreshClick);
 }
